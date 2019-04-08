@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{646E0625-7585-47B6-8EE4-F2E36011CA0C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Tic_Tac_Toe</RootNamespace>
+    <RootNamespace>TicTacToeGame</RootNamespace>
     <AssemblyName>Tic Tac Toe</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -100,8 +100,9 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameField.cs" />
     <Compile Include="Master.cs" />
-    <Compile Include="UserMessage.cs" />
-    <Compile Include="VkApiShell.cs" />
+    <Compile Include="TicTacToe.cs" />
+    <Compile Include="TicTacToeKeyboards.cs" />
+    <Compile Include="TicTacToeRespond.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

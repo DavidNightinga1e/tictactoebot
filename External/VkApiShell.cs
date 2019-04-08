@@ -1,5 +1,4 @@
-﻿using Leaf.xNet;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +8,7 @@ using VkNet.Model;
 using VkNet.Model.Keyboard;
 using VkNet.Model.RequestParams;
 
-namespace Tic_Tac_Toe
+namespace External
 {
     class VkApiShell
     {

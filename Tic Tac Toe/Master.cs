@@ -4,21 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tic_Tac_Toe
+namespace TicTacToeGame
 {
     class Master
     {
-
-        static VkApiShell Shell;
         static Dictionary<long, Game> Tables;
         static Dictionary<string, long> Awaiting;
 
         static void Main()
         {
-            Shell = new VkApiShell("a6c333fd9867e969d04c51b2d22936131341bf43c6fa7d01ef7997da677f62ce30deb2afe351057dc2f1a")
-            {
-                LongPollWait = 25
-            };
 
             Awaiting = new Dictionary<string, long>();
             Tables = new Dictionary<long, Game>();

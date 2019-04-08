@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model.Keyboard;
 
-namespace Tic_Tac_Toe
+namespace TicTacToeGame
 {
     enum TicTacToeSign
     {
@@ -159,6 +159,7 @@ namespace Tic_Tac_Toe
                     Buttons[i, j] = button;
                 }
             }
+            
 
             Keyboard.Buttons = new[] {
                 new[]{ Buttons[0, 0], Buttons[0, 1], Buttons[0, 2]},

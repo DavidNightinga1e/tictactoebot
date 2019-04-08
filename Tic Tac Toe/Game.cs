@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VkNet.Model.Keyboard;
-using VkNet.Enums.SafetyEnums;
 
-namespace Tic_Tac_Toe
+namespace TicTacToeGame
 {
     enum ButtonPushResult
     {
