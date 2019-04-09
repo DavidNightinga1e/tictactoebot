@@ -7,13 +7,15 @@ using VkNet.Model.Keyboard;
 
 namespace TicTacToeGame
 {
-    struct TicTacToeRespond
+    public struct TicTacToeRespond
     {
-        string Message;
-        MessageKeyboard Keyboard;
+        public long Id { private set; get; }
+        public string Message { private set; get; }
+        public MessageKeyboard Keyboard { private set; get; }
 
-        public TicTacToeRespond(string message, MessageKeyboard keyboard)
+        public TicTacToeRespond(long id, string message, MessageKeyboard keyboard)
         {
+            Id = id;
             Message = message;
             Keyboard = keyboard;
         }

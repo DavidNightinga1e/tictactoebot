@@ -99,7 +99,6 @@
   <ItemGroup>
     <Compile Include="Game.cs" />
     <Compile Include="GameField.cs" />
-    <Compile Include="Master.cs" />
     <Compile Include="TicTacToe.cs" />
     <Compile Include="TicTacToeKeyboards.cs" />
     <Compile Include="TicTacToeRespond.cs" />
