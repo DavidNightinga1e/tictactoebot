@@ -37,12 +37,12 @@ namespace TicTacToeGame
         /// <returns>Ответ</returns>
         public ButtonPushResult ButtonPush(long id, string payload)
         {
-            int i = Convert.ToInt32(payload[12]) - 48;
-            int j = Convert.ToInt32(payload[14]) - 48;
+            int i = Convert.ToInt32(payload[1]) - 48;
+            int j = Convert.ToInt32(payload[3]) - 48;
 
             if (id == CurrentPlayer)
             {
-                if (payload[11] == 'C')
+                if (payload[0] == 'C')
                 {
                     if (CurrentPlayer == Player1)
                         Field.Set(i, j, TicTacToeSign.X);

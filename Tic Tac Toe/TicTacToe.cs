@@ -74,8 +74,8 @@ namespace TicTacToeGame
 
                                     return new[]
                                     {
-                                        new TicTacToeRespond(game.Winner, "Вы выиграли! Нажмите любую клавишу для возврата в главное меню", Tables[id].Field.Keyboard),
-                                        new TicTacToeRespond(game.Lost, "Вы проиграли. Нажмите любую клавишу для возврата в главное меню", Tables[id].Field.Keyboard),
+                                        new TicTacToeRespond(game.Winner, "Вы выиграли! Нажмите любую клавишу для возврата в главное меню", game.Field.Keyboard),
+                                        new TicTacToeRespond(game.Lost, "Вы проиграли. Нажмите любую клавишу для возврата в главное меню", game.Field.Keyboard),
                                     };
                                 }
                                 else
@@ -110,6 +110,7 @@ namespace TicTacToeGame
                                     new TicTacToeRespond(id, "Введите номер комнаты.\n\nИли 0, чтобы подключиться к случайной", TicTacToeKeyboards.Empty)
                                 };
                             default:
+                                Dialogs[id] = DialogStatus.Menu;
                                 return new[]
                                 {
                                     new TicTacToeRespond(id, "Ничего не понял. Абсолютно", TicTacToeKeyboards.Main)
@@ -124,6 +125,7 @@ namespace TicTacToeGame
                             {
                                 if (RoomIdToPlayer1.ContainsKey(newRoomId))
                                 {
+                                    Dialogs[id] = DialogStatus.Menu;
                                     return new[] { new TicTacToeRespond(id, "Жаль, но комната с таким номером уже есть. Попробуйте другой", TicTacToeKeyboards.Main) };
                                 }
                             }
@@ -136,15 +138,18 @@ namespace TicTacToeGame
                             }
 
                             RoomIdToPlayer1.Add(newRoomId, id);
+
                             Dialogs[id] = DialogStatus.Menu;
                             return new[] { new TicTacToeRespond(id, $"Комната с номером {newRoomId} создана. Осталось подождать, пока кто-нибудь подключится", TicTacToeKeyboards.Main) };
                         }
                         catch (Exception ex) when (ex is OverflowException || ex is FormatException)
                         {
+                            Dialogs[id] = DialogStatus.Menu;
                             return new[] { new TicTacToeRespond(id, $"Какие-то странные цифры. Это что-то на японском?", TicTacToeKeyboards.Main)};
                         }
                         catch
                         {
+                            Dialogs[id] = DialogStatus.Menu;
                             return new[] { new TicTacToeRespond(id, $"Что-то пошло не так. Совсем не так...", TicTacToeKeyboards.Main) };
                         }
 
@@ -157,7 +162,8 @@ namespace TicTacToeGame
                             if (roomId != 0)
                             {
                                 if (!RoomIdToPlayer1.ContainsKey(roomId))
-                                { 
+                                {
+                                    Dialogs[id] = DialogStatus.Menu;
                                     return new[]
                                     {
                                         new TicTacToeRespond(id, "Такой комнаты нет, можете создать свою или подключиться к случайной", TicTacToeKeyboards.Main)
@@ -168,11 +174,28 @@ namespace TicTacToeGame
                             {
                                 if (RoomIdToPlayer1.Keys.Count > 0)
                                 {
-                                    roomId = RoomIdToPlayer1.Keys.First();
+                                    var roomIds = RoomIdToPlayer1.Keys.ToArray();
+
+                                    foreach (var possibleRoomId in roomIds)
+                                    {
+                                        if (RoomIdToPlayer1[possibleRoomId] != id)
+                                        {
+                                            roomId = possibleRoomId;
+                                            break;
+                                        }
+                                    }
+                                    if (roomId == 0)
+                                    {
+                                        return new[]
+                                        {
+                                            new TicTacToeRespond(id, "Никого нет в очереди. Создайте комнату сами и позовите друга", TicTacToeKeyboards.Main)
+                                        };
+                                    }
                                 }
                                 else
                                 {
                                     // комнат нет
+                                    Dialogs[id] = DialogStatus.Menu;
                                     return new[]
                                     {
                                         new TicTacToeRespond(id, "Никого нет в очереди. Создайте комнату сами и позовите друга", TicTacToeKeyboards.Main)
@@ -197,10 +220,12 @@ namespace TicTacToeGame
                         }
                         catch (Exception ex) when (ex is OverflowException || ex is FormatException)
                         {
+                            Dialogs[id] = DialogStatus.Menu;
                             return new[] { new TicTacToeRespond(id, $"Какие-то странные цифры. Это что-то на японском?", TicTacToeKeyboards.Main) };
                         }
                         catch
                         {
+                            Dialogs[id] = DialogStatus.Menu;
                             return new[] { new TicTacToeRespond(id, $"Что-то пошло не так. Совсем не так...", TicTacToeKeyboards.Main) };
                         }
                 }
@@ -208,7 +233,7 @@ namespace TicTacToeGame
             else
             {
                 Dialogs.Add(id, DialogStatus.Menu);
-
+                
                 return new[]
                 {
                     new TicTacToeRespond(id, "Создайте новую комнату или подключитесь к существующей", TicTacToeKeyboards.Main)
@@ -217,7 +242,7 @@ namespace TicTacToeGame
 
             return new[]
             {
-                new TicTacToeRespond(id, "Произошла ошибка", TicTacToeKeyboards.Empty)
+                new TicTacToeRespond(id, "Произошла неожиданная ошибка. Обратитесь к администратору", TicTacToeKeyboards.Empty)
             };
         }
     }
