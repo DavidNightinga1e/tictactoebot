@@ -15,17 +15,17 @@ namespace TicTacToeGame
 
         public TicTacToeKeyboards()
         {
-            Empty = new MessageKeyboard
-            {
-                OneTime = true
-            };
-
+            var builder = new KeyboardBuilder();
+            builder.SetOneTime();
+            Empty = builder.Build();
+            
+            // todo - переделать под KeyboardBuilder
             MessageKeyboardButton buttonNewRoom = new MessageKeyboardButton
             {
                 Action = new MessageKeyboardButtonAction
                 {
                     Label = "Новая комната",
-                    Payload = "{\"button\":\"NewRoom\"}",
+                    Payload = "{\"button\":\"NewRoom\"}"
                 },
                 Color = KeyboardButtonColor.Positive
             };
@@ -35,7 +35,7 @@ namespace TicTacToeGame
                 Action = new MessageKeyboardButtonAction
                 {
                     Label = "Подключиться",
-                    Payload = "{\"button\":\"ConnectToRoom\"}",
+                    Payload = "{\"button\":\"ConnectToRoom\"}"
                 },
                 Color = KeyboardButtonColor.Positive
             };

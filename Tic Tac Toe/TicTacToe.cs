@@ -8,6 +8,8 @@ namespace TicTacToeGame
 {
     public class TicTacToe
     {
+        private static void Main() { }
+
         enum DialogStatus
         {
             Menu,
@@ -33,7 +35,8 @@ namespace TicTacToeGame
 
         public TicTacToeRespond[] Respond(long id, string message, string payload)
         {
-            payload = payload.Substring(10, payload.Length - 13);
+            if (payload != null)
+                payload = payload.Substring(11, payload.Length - 13);
             
             if (Dialogs.ContainsKey(id))
             {
@@ -133,6 +136,7 @@ namespace TicTacToeGame
                             }
 
                             RoomIdToPlayer1.Add(newRoomId, id);
+                            Dialogs[id] = DialogStatus.Menu;
                             return new[] { new TicTacToeRespond(id, $"Комната с номером {newRoomId} создана. Осталось подождать, пока кто-нибудь подключится", TicTacToeKeyboards.Main) };
                         }
                         catch (Exception ex) when (ex is OverflowException || ex is FormatException)
