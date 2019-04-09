@@ -18,33 +18,12 @@ namespace TicTacToeGame
             var builder = new KeyboardBuilder();
             builder.SetOneTime();
             Empty = builder.Build();
-            
-            // todo - переделать под KeyboardBuilder
-            MessageKeyboardButton buttonNewRoom = new MessageKeyboardButton
-            {
-                Action = new MessageKeyboardButtonAction
-                {
-                    Label = "Новая комната",
-                    Payload = "{\"button\":\"NewRoom\"}"
-                },
-                Color = KeyboardButtonColor.Positive
-            };
 
-            MessageKeyboardButton buttonConnectToRoom = new MessageKeyboardButton
-            {
-                Action = new MessageKeyboardButtonAction
-                {
-                    Label = "Подключиться",
-                    Payload = "{\"button\":\"ConnectToRoom\"}"
-                },
-                Color = KeyboardButtonColor.Positive
-            };
-
-            Main = new MessageKeyboard
-            {
-                OneTime = true,
-                Buttons = new[] { new[] { buttonNewRoom, buttonConnectToRoom } }
-            };
+            builder = new KeyboardBuilder();
+            builder.AddButton("Новая комната", "NewRoom", KeyboardButtonColor.Positive);
+            builder.AddButton("Подключиться", "ConnectToRoom", KeyboardButtonColor.Positive);
+            builder.SetOneTime();
+            Main = builder.Build();
         }
     }
 }
